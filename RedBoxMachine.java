@@ -14,7 +14,7 @@ public class RedBoxMachine
    //Create an instance variable to hold all of the DVDs.
 
    /** the list of DVDs */
-   ArrayList<DVD> movies = new ArrayList<String>();
+   ArrayList<DVD> movies = new ArrayList<DVD>();
 
    /** Constructs a Redbox Machine and fills it with DVDs
     *  Reads the file MovieList.txt so make sure that the
@@ -39,18 +39,15 @@ public class RedBoxMachine
    public int searchForMovie(String title)
    {
       // Complete the method to search for a movie.
-      if (title.equals())
       for (int i = 0; i < movies.size(); i++) {
          if (movies.get(i).equals(title)) {
             // Find the index of i if the movie is there.
             return movies.indexOf(title);
          }
       }
-      else {
-         // If placement is -1, then the movie isn't there.
-         return -1;
-      }
-    }
+      // If placement is -1, then the movie isn't there.
+      return -1;
+   }
 
    /** Returns the titles of all available DVD's in
     *  the machine.
@@ -63,9 +60,9 @@ public class RedBoxMachine
       ArrayList<String> availableTitles = new ArrayList<String>();
       // Movie is avail if numcopies>=1
       for (int i = 0; i < movies.size(); i++) {
-         if (movies[i].getNumCopies() >= 1) {
+         if (movies.get(i).getNumCopies() >= 1) {
             // Find the index of i if the movie is there.
-            availableTitles.add(movies[i].getTitle());
+            availableTitles.add(movies.get(i).getTitle());
          }
       }
       return availableTitles;
@@ -85,10 +82,10 @@ public class RedBoxMachine
       for (int i = 0; i < movies.size(); i++) {
          if (movies.get(i).equals(title)) {
             // Decrement if movie title exists and is available
-            movies[i].decrementCopies();
+            movies.get(i).decrementCopies();
             // if copies is zero, remove from the list now
-            if (movies[i].getNumCopies() == 0) {
-               movies[i].remove();
+            if (movies.get(i).getNumCopies() == 0) {
+               movies.remove(i);
             }
             return true;
          }
@@ -107,17 +104,15 @@ public class RedBoxMachine
       // Complete the method to return a movie.
       // check if movie exist, increment copies
       for (int i = 0; i < movies.size(); i++) {
-         if (movies.get(i).equals(title)) {
-            // if copies was zero, add movie back to the list now
-            if (movies[i].incrementCopies() == 0) {
-               movies.add(title);
-            }
-            // increment numCopies
-            movies[i].incrementCopies();
-            return true;
+         if (movies.get(i).getTitle().equals(title)) {
+            // increment numCopies if already in list
+            movies.get(i).incrementCopies();
+            return movies.get(i);
          }
       }
-      return false;
+      // if movie wasn't in list anymore, add movie back to the list now
+      movies.add(new DVD(title));
+      return movies.get(movies.size() - 1);
    }
 
    /** This method fills the machine with movies. You do not have
