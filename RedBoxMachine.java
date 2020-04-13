@@ -40,9 +40,9 @@ public class RedBoxMachine
    {
       // Complete the method to search for a movie.
       for (int i = 0; i < movies.size(); i++) {
-         if (movies.get(i).equals(title)) {
+         if (movies.get(i).getTitle().equals(title)) {
             // Find the index of i if the movie is there.
-            return movies.indexOf(title);
+            return i;
          }
       }
       // If placement is -1, then the movie isn't there.
@@ -80,7 +80,7 @@ public class RedBoxMachine
       // Complete the method to rent a movie.
       // check if movie exist, decrement
       for (int i = 0; i < movies.size(); i++) {
-         if (movies.get(i).equals(title)) {
+         if (movies.get(i).getTitle().equals(title)) {
             // Decrement if movie title exists and is available
             movies.get(i).decrementCopies();
             // if copies is zero, remove from the list now
@@ -102,7 +102,7 @@ public class RedBoxMachine
    public DVD returnMovie(String title)
    {
       // Complete the method to return a movie.
-      // check if movie exist, increment copies
+      // If movie exist already in list, increment copies
       for (int i = 0; i < movies.size(); i++) {
          if (movies.get(i).getTitle().equals(title)) {
             // increment numCopies if already in list

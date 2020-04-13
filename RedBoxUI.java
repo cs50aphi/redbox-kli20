@@ -63,11 +63,14 @@ public class RedBoxUI
 
             // Complete the code to search for a movie.  Make sure to include
             // messages that inform the user whether the movie was found or not.
-            if (rm.searchForMovie(title) == -1) {
-               System.out.println("Sorry, " + title + " was not found in movie list.");
+            if (rm.searchForMovie(title) > 0) {
+               System.out.println(title + " was successfully found in movie list! ");
+            }
+            else if (rm.searchForMovie(title) == -1) {
+               System.out.println("Sorry, " + rm.searchForMovie(title) + " was not found in movie list.");
             }
             else {
-               System.out.println(title + "was successfully found in movie list! ");
+               System.out.println("Sorry, " + rm.searchForMovie(title) + " was not found in movie list.");
             }
 
          }
