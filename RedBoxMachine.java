@@ -82,8 +82,18 @@ public class RedBoxMachine
    {
       // Complete the method to rent a movie.
       // check if movie exist, decrement
-      movies.decrementCopies()
-      // if copies is zero, remove from the list now
+      for (int i = 0; i < movies.size(); i++) {
+         if (movies.get(i).equals(title)) {
+            // Decrement if movie title exists and is available
+            movies[i].decrementCopies();
+            // if copies is zero, remove from the list now
+            if (movies[i].getNumCopies() == 0) {
+               movies[i].remove();
+            }
+            return true;
+         }
+      }
+      return false;
    }
 
    /** Allows a customer to return a movie. When the movie is returned, the number
@@ -95,6 +105,19 @@ public class RedBoxMachine
    public DVD returnMovie(String title)
    {
       // Complete the method to return a movie.
+      // check if movie exist, increment copies
+      for (int i = 0; i < movies.size(); i++) {
+         if (movies.get(i).equals(title)) {
+            // if copies was zero, add movie back to the list now
+            if (movies[i].incrementCopies() == 0) {
+               movies.add(title);
+            }
+            // increment numCopies
+            movies[i].incrementCopies();
+            return true;
+         }
+      }
+      return false;
    }
 
    /** This method fills the machine with movies. You do not have

@@ -39,6 +39,12 @@ public class RedBoxUI
             // Complete the code to rent a movie. This code should let the user
             // know if the movie was rented successfully or not (not could occur if
             // the movie they enter is not available).
+            if (rm.rent()) {
+               System.out.println("Movie rented successfully!");
+            }
+            else {
+               System.out.println("Movie was unable to be rented.");
+            }
          }
          else if(option == 3)
          {
